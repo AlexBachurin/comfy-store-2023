@@ -197,6 +197,7 @@ p {
   margin-left: auto;
   margin-right: auto;
 }
+ /* take all space of page */
 .page-100 {
   min-height: calc(100vh - 10rem);
   padding: 5rem 0;
