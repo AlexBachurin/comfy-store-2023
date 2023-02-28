@@ -13,10 +13,14 @@ const Contact = () => {
             quisquam rem accusamus dignissimos, voluptate nesciunt veritatis
             deleniti? Saepe corrupti eius natus.
           </p>
-          <form className="contact-form">
+          <form
+            action="https://formspree.io/f/xknabjky"
+            method="POST"
+            className="contact-form"
+          >
             <input
               type="emal"
-              name="email"
+              name="_replyto"
               id="email"
               className="form-input"
               placeholder="enter email"
