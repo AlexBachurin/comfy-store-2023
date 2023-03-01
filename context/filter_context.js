@@ -25,6 +25,14 @@ export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Set Grid or List view
+  const setGridView = () => {
+    dispatch({ type: SET_GRIDVIEW });
+  };
+  const setListView = () => {
+    dispatch({ type: SET_LISTVIEW });
+  };
+
   // dispatch on component load and pass products from products context
   // add to dependancy array since products will be empty array at first
   useEffect(() => {
@@ -32,7 +40,7 @@ export const FilterProvider = ({ children }) => {
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
       {children}
     </FilterContext.Provider>
   );
