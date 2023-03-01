@@ -11,11 +11,15 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    // find maxPrice for filters
+    let pricesArr = action.payload.map((item) => item.price);
+    let maxPrice = Math.max(...pricesArr);
     return {
       ...state,
       // !!!use spread to copy products, so js wont point on same products object from products context
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
   // SET GRID OR LIST VIEW
@@ -54,6 +58,14 @@ const filter_reducer = (state, action) => {
     }
     // just return state, since sort mutates filtered products array anyway
     return { ...state };
+  }
+  // FILTERS
+  if (action.type === UPDATE_FILTERS) {
+    // get name and value from payload
+    const { name, value } = action.payload;
+    console.log(action.payload);
+    // update dynamically filters object by provided values from payload
+    return { ...state, filters: { ...state.filters, [name]: value } };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };

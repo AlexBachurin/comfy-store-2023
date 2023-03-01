@@ -17,6 +17,16 @@ const initialState = {
   all_products: [],
   grid_view: true,
   sort_term: "price-lowest",
+  filters: {
+    text: "",
+    category: "all",
+    company: "all",
+    colors: "all",
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    shipping: false,
+  },
 };
 
 const FilterContext = React.createContext();
@@ -41,6 +51,16 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
+  // FILTERS
+  const updateFilters = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const clearFilters = () => {};
+
   // dispatch on component load and pass products from products context
   // add to dependancy array since products will be empty array at first
   useEffect(() => {
@@ -54,7 +74,14 @@ export const FilterProvider = ({ children }) => {
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView, setListView, updateSort }}
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        updateSort,
+        updateFilters,
+        clearFilters,
+      }}
     >
       {children}
     </FilterContext.Provider>
