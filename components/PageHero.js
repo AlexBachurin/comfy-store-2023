@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-const PageHero = ({ title }) => {
+const PageHero = ({ title, product }) => {
   return (
     <Wrapper>
       <div className="section-center">
         <h3>
-          <Link to={"/"}>Home</Link>/ {title}
+          <Link to={"/"}>Home</Link>/
+          {/* if products prop is true then display link to products aswell
+          made for SingleProduct page */}
+          {product ? <Link to={"/products"}>products /</Link> : null}
+          {title}
         </h3>
       </div>
     </Wrapper>
