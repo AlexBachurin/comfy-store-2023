@@ -3,9 +3,17 @@ import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
+import { useProductsContext } from "../context/products_context";
 
 const Filters = () => {
-  const { updateFilters, clearFilters, filters } = useFilterContext();
+  const { updateFilters, clearFilters, filters, all_products } =
+    useFilterContext();
+
+  // get unique values for each filter category
+  const categories = getUniqueValues(all_products, "category");
+  const companies = getUniqueValues(all_products, "company");
+  const colors = getUniqueValues(all_products, "colors");
+  console.log(colors);
   return (
     <Wrapper>
       <div className="content">
