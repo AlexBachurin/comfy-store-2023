@@ -16,6 +16,7 @@ const initialState = {
   filtered_products: [],
   all_products: [],
   grid_view: true,
+  sort_term: "price-lowest",
 };
 
 const FilterContext = React.createContext();
@@ -33,6 +34,13 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
 
+  // SORT
+  const updateSort = (e) => {
+    // pass selected value of select element
+    const value = e.target.value;
+    dispatch({ type: UPDATE_SORT, payload: value });
+  };
+
   // dispatch on component load and pass products from products context
   // add to dependancy array since products will be empty array at first
   useEffect(() => {
@@ -40,7 +48,9 @@ export const FilterProvider = ({ children }) => {
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
+    <FilterContext.Provider
+      value={{ ...state, setGridView, setListView, updateSort }}
+    >
       {children}
     </FilterContext.Provider>
   );
