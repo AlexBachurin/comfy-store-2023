@@ -34,8 +34,8 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: id });
   };
   // TOGGLE Amount
-  const toggleAmount = (id) => {
-    console.log("amount toggle");
+  const toggleAmount = (id, type) => {
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, type } });
   };
 
   //save cart items to localstorage, every time there is change in cart

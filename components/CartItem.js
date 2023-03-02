@@ -9,11 +9,11 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
 
   // increase
   const increase = () => {
-    console.log("increase");
+    toggleAmount(id, "inc");
   };
   // decrease
   const decrease = () => {
-    console.log("decrease");
+    toggleAmount(id, "dec");
   };
   return (
     <Wrapper>
