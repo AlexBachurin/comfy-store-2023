@@ -1,3 +1,4 @@
+//FORMAT PRICE
 export const formatPrice = (number) => {
   const newNumber = Intl.NumberFormat("en-US", {
     style: "currency",
@@ -6,6 +7,7 @@ export const formatPrice = (number) => {
   return newNumber;
 };
 
+//UNIQUE VALUES
 export const getUniqueValues = (products, term) => {
   // get unique values for provided string in array
   let uniqValuesForTerm = products.map((item) => item[term]);
@@ -15,4 +17,14 @@ export const getUniqueValues = (products, term) => {
   }
   const uniqValues = ["all", ...new Set(uniqValuesForTerm)];
   return uniqValues;
+};
+
+//LOCAL STORAGE
+export const getCartFromLocalStorage = () => {
+  const cart = localStorage.getItem("cart");
+  if (cart) {
+    return JSON.parse(cart);
+  } else {
+    return [];
+  }
 };

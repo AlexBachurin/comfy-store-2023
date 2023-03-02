@@ -7,9 +7,10 @@ import {
   CLEAR_CART,
   COUNT_CART_TOTALS,
 } from "../actions";
+import { getCartFromLocalStorage } from "../utils/helpers";
 
 const initialState = {
-  cart: [],
+  cart: getCartFromLocalStorage(),
   totalItems: 0,
   totalAmount: 0,
   shipping_fee: 534,
@@ -24,6 +25,12 @@ export const CartProvider = ({ children }) => {
   const addToCart = (id, color, amount, product) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
+
+  //save cart items to localstorage, every time there is change in cart
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.cart));
+  }, [state.cart]);
+
   return (
     <CartContext.Provider value={{ ...state, addToCart }}>
       {children}
