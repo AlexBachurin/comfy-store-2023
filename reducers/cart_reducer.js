@@ -10,7 +10,7 @@ const cart_reducer = (state, action) => {
   // *** ADD TO CART ***
   if (action.type === ADD_TO_CART) {
     const { id, color, amount, product } = action.payload;
-    console.log(action.payload);
+
     // find item in cart, by id+color property
     const tmpItem = state.cart.find((item) => item.id === id + color);
     // if item with this id and color already exists in cart
@@ -58,7 +58,6 @@ const cart_reducer = (state, action) => {
   }
   // *** TOGGLE CART AMOUNT ***
   if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
-    console.log(action.payload);
     const { id, type } = action.payload;
     // map through cart, find item with same id provided in payload, change amount based on provided operation type in payload
     let tempCart = state.cart.map((item) => {
