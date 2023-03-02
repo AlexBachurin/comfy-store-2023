@@ -233,6 +233,7 @@ const Wrapper = styled.section`
     color: var(--clr-white);
     padding: 0.25rem 0.5rem;
     border-radius: var(--radius);
+    margin-top: 15px;
   }
   @media (min-width: 768px) {
     .content {

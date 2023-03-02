@@ -80,8 +80,15 @@ export const FilterProvider = ({ children }) => {
 
   // sort every time sort term changes
   useEffect(() => {
+    // FILTER PRODUCTS on filter state change
+    dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [products, state.sort_term]);
+  }, [products, state.sort_term, state.filters]);
+
+  // FILTER PRODUCTS on filter state change
+  // useEffect(() => {
+  //   dispatch({ type: FILTER_PRODUCTS });
+  // }, [state.filters]);
 
   return (
     <FilterContext.Provider
