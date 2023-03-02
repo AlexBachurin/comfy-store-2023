@@ -27,11 +27,11 @@ export const CartProvider = ({ children }) => {
   };
   // CLEAR CART
   const clearCart = () => {
-    console.log("cleared cart");
+    dispatch({ type: CLEAR_CART });
   };
   // REMOVE FROM CART
   const removeFromCart = (id) => {
-    console.log(`removed from cart item ${id}`);
+    dispatch({ type: REMOVE_CART_ITEM, payload: id });
   };
   // TOGGLE Amount
   const toggleAmount = (id) => {
