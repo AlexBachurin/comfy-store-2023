@@ -52,6 +52,7 @@ const SingleProductPage = () => {
     description,
     stock,
     stars,
+    colors,
     reviews,
     id: sku,
     company,
@@ -89,7 +90,14 @@ const SingleProductPage = () => {
             </p>
             <hr />
             {/* Add to cart and colors only if in stock */}
-            {stock > 0 && <AddToCart {...single_product} />}
+            {stock > 0 && (
+              <AddToCart
+                id={id}
+                stock={stock}
+                colors={colors}
+                product={single_product}
+              />
+            )}
           </section>
         </div>
       </div>
