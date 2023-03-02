@@ -38,8 +38,10 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, type } });
   };
 
-  //save cart items to localstorage, every time there is change in cart
+  // calculate totals
   useEffect(() => {
+    dispatch({ type: COUNT_CART_TOTALS });
+    //save cart items to localstorage, every time there is change in cart
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 
