@@ -67,6 +67,22 @@ const filter_reducer = (state, action) => {
     // update dynamically filters object by provided values from payload
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
+  // CLEAR FILTERS
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      // reset all filters, but save value for price and max price
+      filters: {
+        ...state.filters,
+        text: "",
+        category: "all",
+        company: "all",
+        color: "all",
+        price: state.filters.max_price,
+        shipping: false,
+      },
+    };
+  }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 

@@ -21,7 +21,7 @@ const initialState = {
     text: "",
     category: "all",
     company: "all",
-    colors: "all",
+    color: "all",
     min_price: 0,
     max_price: 0,
     price: 0,
@@ -54,12 +54,23 @@ export const FilterProvider = ({ children }) => {
   // FILTERS
   const updateFilters = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
     console.log(name, value);
+    // change value for price input since value will be string
+    if (name === "price") {
+      value = Number(value);
+    }
+    // shipping
+    if (name === "shipping") {
+      value = e.target.checked;
+    }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const clearFilters = () => {};
+  const clearFilters = () => {
+    console.log("filters cleared");
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   // dispatch on component load and pass products from products context
   // add to dependancy array since products will be empty array at first

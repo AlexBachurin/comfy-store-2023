@@ -13,7 +13,7 @@ const Filters = () => {
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
-  console.log(colors);
+
   return (
     <Wrapper>
       <div className="content">
@@ -70,10 +70,73 @@ const Filters = () => {
             </select>
           </div>
           {/* colors */}
+          <div className="form-control">
+            <h5>Colors</h5>
+            <div className="colors">
+              {colors.map((color, index) => {
+                // all color btn
+                if (color === "all") {
+                  return (
+                    <button
+                      key={index}
+                      value={color}
+                      name="color"
+                      className={`all-btn ${
+                        filters.color === color ? "active" : null
+                      }`}
+                      onClick={updateFilters}
+                    >
+                      {color}
+                    </button>
+                  );
+                }
+                // rest buttons
+                return (
+                  <button
+                    style={{ background: color }}
+                    key={index}
+                    value={color}
+                    name="color"
+                    className={`color-btn ${
+                      filters.color === color ? "active" : null
+                    }`}
+                    onClick={updateFilters}
+                  >
+                    {filters.color === color ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
           {/* price */}
+          <div className="form-control">
+            <h5>price</h5>
+            <p className="price">{formatPrice(filters.price)}</p>
+            <input
+              name="price"
+              min={filters.min_price}
+              max={filters.max_price}
+              value={filters.price}
+              onChange={updateFilters}
+              type="range"
+            />
+          </div>
           {/* shipping */}
-          {/* clear filters */}
+          <div className="form-cotrol shipping">
+            <label htmlFor="shipping">free shipping</label>
+            <input
+              type="checkbox"
+              name="shipping"
+              id="shipping"
+              checked={filters.shipping}
+              onChange={updateFilters}
+            />
+          </div>
         </form>
+        {/* clear filters */}
+        <button className="clear-btn" onClick={clearFilters}>
+          Clear filters
+        </button>
       </div>
     </Wrapper>
   );
@@ -163,7 +226,7 @@ const Wrapper = styled.section`
     text-transform: capitalize;
     column-gap: 0.5rem;
     font-size: 1rem;
-    max-width: 200px;
+    max-width: 125px;
   }
   .clear-btn {
     background: var(--clr-red-dark);
