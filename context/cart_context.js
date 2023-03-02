@@ -33,6 +33,10 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (id) => {
     console.log(`removed from cart item ${id}`);
   };
+  // TOGGLE Amount
+  const toggleAmount = (id) => {
+    console.log("amount toggle");
+  };
 
   //save cart items to localstorage, every time there is change in cart
   useEffect(() => {
@@ -41,7 +45,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, clearCart, removeFromCart }}
+      value={{ ...state, addToCart, clearCart, removeFromCart, toggleAmount }}
     >
       {children}
     </CartContext.Provider>
