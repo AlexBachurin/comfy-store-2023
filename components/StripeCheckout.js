@@ -59,9 +59,10 @@ const CheckoutForm = () => {
         // data to send
         JSON.stringify({ cart, shipping_fee, totalAmount })
       );
+      setClientSecret(data.data.clientSecret);
     } catch (error) {}
   };
-  // once component mount create post request to server with payment intent
+  // once component mount create post request to server with creation of payment intent
   useEffect(() => {
     createPaymentIntent();
   }, []);
