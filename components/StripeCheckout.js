@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import {
+  PaymentElement,
   CardElement,
   useStripe,
   Elements,
@@ -29,7 +30,7 @@ const CheckoutForm = () => {
   // invoke stripe
   const stripe = useStripe();
   const elements = useElements();
-
+  // stripe card style
   const cardStyle = {
     style: {
       base: {
@@ -47,7 +48,55 @@ const CheckoutForm = () => {
       },
     },
   };
-  return <h4>hello from Stripe Checkout </h4>;
+
+  // PAYMENT INTENT
+  const createPaymentIntent = async () => {
+    console.log("payment intent");
+  };
+  useEffect(() => {
+    createPaymentIntent();
+  }, []);
+
+  // handlers
+  const handleChange = async (e) => {};
+  // submit handler
+  const handleSubmit = async (e) => {};
+
+  return (
+    <div>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <CardElement
+          id="card-element"
+          options={cardStyle}
+          onChange={handleChange}
+        />
+        <button disabled={processing || disabled || succeeded} id="submit">
+          <span id="button-text">
+            {processing ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {/* Show any error that happens when processing the payment */}
+        {error && (
+          <div className="card-error" role="alert">
+            {error}
+          </div>
+        )}
+        {/* Show a success message upon completion */}
+        <p className={succeeded ? "result-message" : "result-message hidden"}>
+          Payment succeeded, see the result in your
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            {" "}
+            Stripe dashboard.
+          </a>{" "}
+          Refresh the page to pay again.
+        </p>
+      </form>
+    </div>
+  );
 };
 
 const StripeCheckout = () => {
@@ -61,6 +110,7 @@ const StripeCheckout = () => {
   );
 };
 
+// styles
 const Wrapper = styled.section`
   form {
     width: 30vw;
