@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { getUserFromLocalStorage } from "../utils/helpers";
 
 const UserContext = React.createContext();
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUserFromLocalStorage());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const provider = new GoogleAuthProvider();
 
+  //sign in
   const signIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -17,9 +19,9 @@ export const UserProvider = ({ children }) => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(token, user);
         if (user) {
-          setUser(user);
+          // set user as provider info without unnecessary info
+          setUser(user.providerData[0]);
           setIsAuthenticated(true);
         }
       })
@@ -34,8 +36,29 @@ export const UserProvider = ({ children }) => {
         // ...
       });
   };
+  // logout
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setUser(null);
+        setIsAuthenticated(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //set user to local storage on successfull login/logout
+  useEffect(() => {
+    localStorage.setItem("user-info", JSON.stringify(user));
+    // if user is not null in local storage, then set authentication state to true aswell
+    if (user) {
+      setIsAuthenticated(true);
+    }
+  }, [user]);
   return (
-    <UserContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <UserContext.Provider value={{ user, isAuthenticated, signIn, logoutUser }}>
       {children}
     </UserContext.Provider>
   );
