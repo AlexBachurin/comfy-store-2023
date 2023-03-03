@@ -68,12 +68,54 @@ const CheckoutForm = () => {
   }, []);
 
   // handlers
-  const handleChange = async (e) => {};
+  const handleChange = async (e) => {
+    // Listen for changes in the CardElement
+    // and display any errors as the customer types their card details
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : "");
+  };
   // submit handler
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //after submitting all info set processing to true which will activate spinner
+    setProcessing(true);
+    // communicate with stripe and get payload with confirmation of payment
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+    //now check payload if its successful then show success message, if not show error
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+    }
+  };
 
   return (
     <div>
+      {succeeded ? (
+        <article>
+          <h4>Thank you, your payment was successful!</h4>
+          <h4>Redirecting to home page...</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Hello, {user?.displayName}</h4>
+          <p>
+            Your total is:{" "}
+            <span className="order-total">
+              {formatPrice(shipping_fee + totalAmount)}
+            </span>
+          </p>
+          <p>Test card for payment succeeded: 4242 4242 4242 4242</p>
+          <p>Test card for payment declined: 4000 0000 0000 9995</p>
+        </article>
+      )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
@@ -244,6 +286,10 @@ const Wrapper = styled.section`
     -webkit-animation: loading 2s infinite ease;
     animation: loading 2s infinite ease;
   }
+  .order-total {
+    font-weight: bold;
+    font-size: 18px;
+  }
   @keyframes loading {
     0% {
       -webkit-transform: rotate(0deg);
@@ -252,6 +298,12 @@ const Wrapper = styled.section`
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
+    }
+  }
+
+  @media only screen and (max-width: 1233px) {
+    form {
+      width: 50vw;
     }
   }
   @media only screen and (max-width: 600px) {
