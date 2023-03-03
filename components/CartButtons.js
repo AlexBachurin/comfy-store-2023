@@ -9,6 +9,7 @@ import { useUserContext } from "../context/user_context";
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
   const { totalItems } = useCartContext();
+  const { user, signIn, logoutUser } = useUserContext();
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn">
@@ -18,10 +19,21 @@ const CartButtons = () => {
           <span className="cart-value">{totalItems}</span>
         </span>
       </Link>
-      <button className="auth-btn">
-        Login
-        <FaUserPlus />
-      </button>
+      {user ? (
+        <button onClick={logoutUser} className="auth-btn">
+          Logout
+          <img
+            className="user-img"
+            src={user.photoURL}
+            alt={user.displayName}
+          />
+        </button>
+      ) : (
+        <button onClick={signIn} className="auth-btn">
+          Login
+          <FaUserPlus />
+        </button>
+      )}
     </Wrapper>
   );
 };
@@ -30,7 +42,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  width: 225px;
+  width: 240px;
 
   .cart-btn {
     color: var(--clr-grey-1);
@@ -77,6 +89,11 @@ const Wrapper = styled.div`
     svg {
       margin-left: 5px;
     }
+  }
+  .user-img {
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 5px;
   }
 `;
 export default CartButtons;

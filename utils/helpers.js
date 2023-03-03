@@ -19,12 +19,22 @@ export const getUniqueValues = (products, term) => {
   return uniqValues;
 };
 
-//LOCAL STORAGE
+//LOCAL STORAGE CART
 export const getCartFromLocalStorage = () => {
   const cart = localStorage.getItem("cart");
   if (cart) {
     return JSON.parse(cart);
   } else {
     return [];
+  }
+};
+
+//LOCAL STORAGE USER
+export const getUserFromLocalStorage = () => {
+  const user = localStorage.getItem("user-info");
+  if (user) {
+    return JSON.parse(user);
+  } else {
+    return null;
   }
 };
