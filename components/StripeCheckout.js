@@ -51,8 +51,17 @@ const CheckoutForm = () => {
 
   // PAYMENT INTENT
   const createPaymentIntent = async () => {
-    console.log("payment intent");
+    try {
+      // post to server(netlify serverless function, but idea to normal server the same)
+      const data = await axios.post(
+        // url to server
+        "/.netlify/functions/create-payment-intent",
+        // data to send
+        JSON.stringify({ cart, shipping_fee, totalAmount })
+      );
+    } catch (error) {}
   };
+  // once component mount create post request to server with payment intent
   useEffect(() => {
     createPaymentIntent();
   }, []);
