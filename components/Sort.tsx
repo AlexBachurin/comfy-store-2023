@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFilterContext } from "../context/filters/filter_context";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 import styled from "styled-components";
+import { FILTERS_CONTEXT_TYPE } from "@src/context/filters/filter_context_types";
 const Sort = () => {
   const {
     filtered_products,
@@ -10,7 +11,7 @@ const Sort = () => {
     setListView,
     updateSort,
     sort_term,
-  } = useFilterContext();
+  } = useFilterContext() as FILTERS_CONTEXT_TYPE;
 
   return (
     <Wrapper>

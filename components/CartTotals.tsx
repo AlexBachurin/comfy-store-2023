@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useCartContext } from "../context/cart_context/cart_context";
-import { useUserContext } from "../context/user_context";
+import { useUserContext } from "../context/user/user_context";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
 import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
+import { User_Context_Type } from "@src/context/user/user_context_types";
 
 const CartTotals = () => {
   const { totalAmount, shipping_fee } = useCartContext() as Cart_Context_Type;
-  const { user } = useUserContext();
+  const { user } = useUserContext() as User_Context_Type;
   return (
     <Wrapper>
       <div>

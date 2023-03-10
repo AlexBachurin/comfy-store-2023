@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
-const ListView = ({ products }) => {
+import { Product_Type } from "@src/context/products/products_context_types";
+
+type ListView_Props = {
+  products: Product_Type[];
+};
+
+const ListView: React.FC<ListView_Props> = ({ products }) => {
   return (
     <Wrapper>
       {products.map(({ id, image, name, price, description }) => {

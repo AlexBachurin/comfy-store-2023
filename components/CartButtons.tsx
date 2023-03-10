@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../context/products/products_context";
 import { useCartContext } from "../context/cart_context/cart_context";
-import { useUserContext } from "../context/user_context";
+import { useUserContext } from "../context/user/user_context";
 import { Products_Context_Type } from "@src/context/products/products_context_types";
 import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
+import { User_Context_Type } from "@src/context/user/user_context_types";
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext() as Products_Context_Type;
   const { totalItems } = useCartContext() as Cart_Context_Type;
-  const { user, signIn, logoutUser } = useUserContext();
+  const { user, signIn, logoutUser } = useUserContext() as User_Context_Type;
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn">

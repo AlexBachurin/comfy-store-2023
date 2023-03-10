@@ -20,7 +20,7 @@ export type Products_Context_Type = {
   single_product: Single_Product_Type | null;
   openSidebar: () => void;
   closeSidebar: () => void;
-  fetchSingleProduct: (url: string, id: string) => void;
+  fetchSingleProduct: (url: string, id: any) => void;
 };
 
 export interface Product_Type {
@@ -28,7 +28,7 @@ export interface Product_Type {
   name: string;
   price: number;
   image: string;
-  colors: String[];
+  colors: string[];
   company: string;
   description: string;
   category: string;
@@ -42,7 +42,7 @@ export interface Single_Product_Type {
   name: string;
   price: number;
   images: Single_Product_Image[];
-  colors: String[];
+  colors: string[];
   company: string;
   description: string;
   category: string;

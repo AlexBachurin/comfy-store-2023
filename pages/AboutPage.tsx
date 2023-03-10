@@ -6,7 +6,7 @@ import aboutImg from "../assets/hero-bcg.jpeg";
 const AboutPage = () => {
   return (
     <main>
-      <PageHero title={"about"} />
+      <PageHero title={"about"} product={false} />
       <Wrapper className="page section section-center">
         <img src={aboutImg} alt="desk" />
         <article>

@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
-const Stars = ({ stars, reviews }) => {
+
+type Stars_Props = {
+  stars: number;
+  reviews: number;
+};
+
+const Stars: React.FC<Stars_Props> = ({ stars, reviews }) => {
   //create array with 5 items, in callback return span with stars, compare it with index
   // and return star icon respectively
   const tempStars = Array.from({ length: 5 }, (_, index) => {

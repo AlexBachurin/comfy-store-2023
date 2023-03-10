@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products/products_context";
-import { useUserContext } from "../context/user_context";
+import { useUserContext } from "../context/user/user_context";
+import { Products_Context_Type } from "@src/context/products/products_context_types";
 
 const Nav = () => {
-  const { openSidebar } = useProductsContext();
+  const { openSidebar } = useProductsContext() as Products_Context_Type;
   return (
     <NavContainer>
       <div className="nav-center">

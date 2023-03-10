@@ -1,7 +1,12 @@
+import { Single_Product_Image } from "@src/context/products/products_context_types";
 import React, { useState } from "react";
 import styled from "styled-components";
+
+type ProductImages_Props = {
+  images: Single_Product_Image[];
+};
 // set images by default to empty array or there will be bug
-const ProductImages = ({ images = [] }) => {
+const ProductImages: React.FC<ProductImages_Props> = ({ images = [] }) => {
   // main image will be first in array
   const [mainImg, setMainImg] = useState(images[0]);
   return (

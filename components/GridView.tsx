@@ -1,8 +1,13 @@
+import { Product_Type } from "@src/context/products/products_context_types";
 import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const GridView = ({ products }) => {
+type GridView_Props = {
+  products: Product_Type[];
+};
+
+const GridView: React.FC<GridView_Props> = ({ products }) => {
   return (
     <Wrapper>
       <section className="products-container">

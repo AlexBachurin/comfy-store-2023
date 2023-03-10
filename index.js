@@ -6,7 +6,7 @@ import App from "./App";
 import { ProductsProvider } from "./context/products/products_context";
 import { FilterProvider } from "./context/filters/filter_context";
 import { CartProvider } from "./context/cart_context/cart_context";
-import { UserProvider } from "./context/user_context";
+import { UserProvider } from "./context/user/user_context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

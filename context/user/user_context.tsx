@@ -1,10 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { getUserFromLocalStorage } from "../utils/helpers";
+import { auth } from "../../firebase";
+import { getUserFromLocalStorage } from "../../utils/helpers";
+import { User_Context_Type } from "./user_context_types";
 
-const UserContext = React.createContext();
-export const UserProvider = ({ children }) => {
+const UserContext = React.createContext<User_Context_Type | null>(null);
+
+type UserProvider_Props = {
+  children: React.ReactNode;
+};
+export const UserProvider: React.FC<UserProvider_Props> = ({ children }) => {
   const [user, setUser] = useState(getUserFromLocalStorage());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -16,7 +21,7 @@ export const UserProvider = ({ children }) => {
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
         if (user) {

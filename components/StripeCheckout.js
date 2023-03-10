@@ -10,7 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useCartContext } from "../context/cart_context/cart_context";
-import { useUserContext } from "../context/user_context";
+import { useUserContext } from "../context/user/user_context";
 import { formatPrice } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 

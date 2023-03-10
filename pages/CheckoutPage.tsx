@@ -4,12 +4,13 @@ import { PageHero, StripeCheckout } from "../components";
 // extra imports
 import { useCartContext } from "../context/cart_context/cart_context";
 import { Link } from "react-router-dom";
+import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
 
 const CheckoutPage = () => {
-  const { cart } = useCartContext();
+  const { cart } = useCartContext() as Cart_Context_Type;
   return (
     <main>
-      <PageHero title={"checkout"} />
+      <PageHero title={"checkout"} product={false} />
       <Wrapper className="page">
         {cart.length < 1 ? (
           <div className="empty">

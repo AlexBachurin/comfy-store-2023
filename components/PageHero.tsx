@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-const PageHero = ({ title, product }) => {
+import { Product_Type } from "@src/context/products/products_context_types";
+
+type PageHero_Props = {
+  title: string;
+  product: boolean;
+};
+
+const PageHero: React.FC<PageHero_Props> = ({ title, product }) => {
   return (
     <Wrapper>
       <div className="section-center">
