@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useReducer } from "react";
-import reducer from "../reducers/filter_reducer";
+import reducer from "../../reducers/filter_reducer";
 import {
   LOAD_PRODUCTS,
   SET_GRIDVIEW,
@@ -9,10 +9,12 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
-} from "../actions";
-import { useProductsContext } from "./products/products_context";
+} from "../../actions";
+import { useProductsContext } from "../products/products_context";
+import { FILTERS_CONTEXT_TYPE, FILTERS_STATE } from "./filter_context_types";
+import { Products_Context_Type } from "../products/products_context_types";
 
-const initialState = {
+const initialState: FILTERS_STATE = {
   filtered_products: [],
   all_products: [],
   grid_view: true,
@@ -29,11 +31,17 @@ const initialState = {
   },
 };
 
-const FilterContext = React.createContext();
+const FilterContext = React.createContext<FILTERS_CONTEXT_TYPE | null>(null);
 
-export const FilterProvider = ({ children }) => {
+type FILTER_PROVIDER_PROPS = {
+  children: React.ReactNode;
+};
+
+export const FilterProvider: React.FC<FILTER_PROVIDER_PROPS> = ({
+  children,
+}) => {
   // get products from products context
-  const { products } = useProductsContext();
+  const { products } = useProductsContext() as Products_Context_Type;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Set Grid or List view
@@ -45,17 +53,17 @@ export const FilterProvider = ({ children }) => {
   };
 
   // SORT
-  const updateSort = (e) => {
+  const updateSort: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     // pass selected value of select element
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
   // FILTERS
-  const updateFilters = (e) => {
+  const updateFilters: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const name = e.target.name;
-    let value = e.target.value;
-    console.log(name, value);
+    // set value as string number or boolean since in different cases we need to set value as number or boolean
+    let value = e.target.value as string | number | boolean;
     // change value for price input since value will be string
     if (name === "price") {
       value = Number(value);

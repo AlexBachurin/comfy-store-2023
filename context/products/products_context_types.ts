@@ -23,7 +23,7 @@ export type Products_Context_Type = {
   fetchSingleProduct: (url: string, id: string) => void;
 };
 
-export type Product_Type = {
+export interface Product_Type {
   id: string;
   name: string;
   price: number;
@@ -34,9 +34,9 @@ export type Product_Type = {
   category: string;
   shipping: boolean;
   featured: boolean;
-};
+}
 
-export type Single_Product_Type = {
+export interface Single_Product_Type {
   id: string;
   stock: number;
   name: string;
@@ -49,7 +49,7 @@ export type Single_Product_Type = {
   shipping: boolean;
   reviews: number;
   stars: number;
-};
+}
 
 export type Single_Product_Image = {
   id: string;

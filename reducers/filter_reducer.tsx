@@ -1,3 +1,5 @@
+import { FILTERS_ACTIONTYPES } from "@src/context/filters/filter_action_types";
+import { FILTERS_STATE } from "@src/context/filters/filter_context_types";
 import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
@@ -9,7 +11,7 @@ import {
   CLEAR_FILTERS,
 } from "../actions";
 
-const filter_reducer = (state, action) => {
+const filter_reducer = (state: FILTERS_STATE, action: FILTERS_ACTIONTYPES) => {
   if (action.type === LOAD_PRODUCTS) {
     // find maxPrice for filters
     let pricesArr = action.payload.map((item) => item.price);
@@ -63,7 +65,6 @@ const filter_reducer = (state, action) => {
   if (action.type === UPDATE_FILTERS) {
     // get name and value from payload
     const { name, value } = action.payload;
-    console.log(action.payload);
     // update dynamically filters object by provided values from payload
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
@@ -115,7 +116,7 @@ const filter_reducer = (state, action) => {
 
     return { ...state, filtered_products: tempProducts };
   }
-  throw new Error(`No Matching "${action.type}" - action type`);
+  throw new Error(`No Matching  - action type`);
 };
 
 export default filter_reducer;
