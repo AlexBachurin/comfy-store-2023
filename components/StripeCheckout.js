@@ -12,7 +12,7 @@ import axios from "axios";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // load stripe
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -20,7 +20,7 @@ const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
   const { cart, totalAmount, shipping_fee } = useCartContext();
   const { user } = useUserContext();
-  const history = useHistory();
+  const navigate = useNavigate();
   // STRIPE states
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -93,6 +93,9 @@ const CheckoutForm = () => {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   };
 
