@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
-import { useProductsContext } from "../context/products_context";
+import { useProductsContext } from "../context/products/products_context";
 
 const Filters = () => {
   const { updateFilters, clearFilters, filters, all_products } =

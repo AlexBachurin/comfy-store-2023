@@ -1,3 +1,5 @@
+import { CART_ACTIONTYPE } from "@src/context/cart_context/cart_action_types";
+import { Cart_State } from "@src/context/cart_context/cart_context_types";
 import {
   ADD_TO_CART,
   CLEAR_CART,
@@ -6,7 +8,7 @@ import {
   TOGGLE_CART_ITEM_AMOUNT,
 } from "../actions";
 
-const cart_reducer = (state, action) => {
+const cart_reducer = (state: Cart_State, action: CART_ACTIONTYPE) => {
   // *** ADD TO CART ***
   if (action.type === ADD_TO_CART) {
     const { id, color, amount, product } = action.payload;
@@ -108,7 +110,7 @@ const cart_reducer = (state, action) => {
     );
     return { ...state, totalAmount, totalItems };
   }
-  throw new Error(`No Matching "${action.type}" - action type`);
+  throw new Error(`No Matching  - action type`);
 };
 
 export default cart_reducer;

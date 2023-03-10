@@ -1,3 +1,5 @@
+import { PRODUCTS_ACTIONTYPES } from "@src/context/products/products_action_types";
+import { Products_State } from "@src/context/products/products_context_types";
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -9,7 +11,10 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from "../actions";
 
-const products_reducer = (state, action) => {
+const products_reducer = (
+  state: Products_State,
+  action: PRODUCTS_ACTIONTYPES
+) => {
   //SIDEBAR
   if (action.type === SIDEBAR_OPEN) {
     return { ...state, isSidebarOpen: true };
@@ -52,7 +57,7 @@ const products_reducer = (state, action) => {
       single_product_error: true,
     };
   }
-  throw new Error(`No Matching "${action.type}" - action type`);
+  throw new Error(`No Matching  - action type`);
 };
 
 export default products_reducer;

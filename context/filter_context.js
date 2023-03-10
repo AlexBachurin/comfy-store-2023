@@ -10,7 +10,7 @@ import {
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
 } from "../actions";
-import { useProductsContext } from "./products_context";
+import { useProductsContext } from "./products/products_context";
 
 const initialState = {
   filtered_products: [],
