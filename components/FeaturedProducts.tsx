@@ -5,10 +5,12 @@ import styled from "styled-components";
 import Error from "./Error";
 import Loading from "./Loading";
 import Product from "./Product";
+import { Products_Context_Type } from "@src/context/products/products_context_types";
 
 const FeaturedProducts = () => {
   const { products_loading, products_error, featuredProducts } =
-    useProductsContext();
+    useProductsContext() as Products_Context_Type;
+
   if (products_loading) {
     return <Loading />;
   }

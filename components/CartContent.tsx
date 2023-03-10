@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
+import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
 
 const CartContent = () => {
-  const { cart, clearCart } = useCartContext();
+  const { cart, clearCart } = useCartContext() as Cart_Context_Type;
   return (
     <Wrapper className="section section-center">
       <CartColumns />

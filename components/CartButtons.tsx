@@ -5,10 +5,12 @@ import styled from "styled-components";
 import { useProductsContext } from "../context/products/products_context";
 import { useCartContext } from "../context/cart_context/cart_context";
 import { useUserContext } from "../context/user_context";
+import { Products_Context_Type } from "@src/context/products/products_context_types";
+import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
 
 const CartButtons = () => {
-  const { closeSidebar } = useProductsContext();
-  const { totalItems } = useCartContext();
+  const { closeSidebar } = useProductsContext() as Products_Context_Type;
+  const { totalItems } = useCartContext() as Cart_Context_Type;
   const { user, signIn, logoutUser } = useUserContext();
   return (
     <Wrapper className="cart-btn-wrapper">

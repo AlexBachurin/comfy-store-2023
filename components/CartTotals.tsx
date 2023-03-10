@@ -4,9 +4,10 @@ import { useCartContext } from "../context/cart_context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import { Cart_Context_Type } from "@src/context/cart_context/cart_context_types";
 
 const CartTotals = () => {
-  const { totalAmount, shipping_fee } = useCartContext();
+  const { totalAmount, shipping_fee } = useCartContext() as Cart_Context_Type;
   const { user } = useUserContext();
   return (
     <Wrapper>

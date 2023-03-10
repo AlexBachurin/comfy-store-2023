@@ -8,7 +8,7 @@ export type FILTERS_ACTIONTYPES =
   | { type: "SORT_PRODUCTS" }
   | {
       type: "UPDATE_FILTERS";
-      payload: { name: string; value: any };
+      payload: { name: string; value: string | number | boolean };
     }
   | { type: "FILTER_PRODUCTS" }
   | { type: "CLEAR_FILTERS" };

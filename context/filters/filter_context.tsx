@@ -60,7 +60,7 @@ export const FilterProvider: React.FC<FILTER_PROVIDER_PROPS> = ({
   };
 
   // FILTERS
-  const updateFilters: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const updateFilters: React.ChangeEventHandler<HTMLFormElement> = (e) => {
     const name = e.target.name;
     // set value as string number or boolean since in different cases we need to set value as number or boolean
     let value = e.target.value as string | number | boolean;

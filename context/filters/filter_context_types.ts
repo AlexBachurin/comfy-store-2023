@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { FormEventHandler } from "react";
 import { Product_Type } from "../products/products_context_types";
 
 export type FILTERS_STATE = {
@@ -35,7 +35,8 @@ export type FILTERS_CONTEXT_TYPE = {
   };
   setGridView: () => void;
   setListView: () => void;
-  updateSort: ChangeEventHandler<HTMLInputElement>;
-  updateFilters: ChangeEventHandler<HTMLInputElement>;
+  updateSort: FormEventHandler;
+  updateFilters: FormEventHandler;
+
   clearFilters: () => void;
 };

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useFilterContext } from "../context/filters/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
-import { useProductsContext } from "../context/products/products_context";
+import { FILTERS_CONTEXT_TYPE } from "@src/context/filters/filter_context_types";
 
 const Filters = () => {
   const { updateFilters, clearFilters, filters, all_products } =
-    useFilterContext();
+    useFilterContext() as FILTERS_CONTEXT_TYPE;
 
   // get unique values for each filter category
   const categories = getUniqueValues(all_products, "category");
